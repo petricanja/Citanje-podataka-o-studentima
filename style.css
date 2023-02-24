@@ -1,0 +1,28 @@
+#loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+#loader:after {
+    width: 20px;
+    height: 20px;
+    margin: 4px;
+    content: "";
+    display: block;
+    border-radius: 50%;
+    border: 4px;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#my-text-area {
+    width: 100%;
+    margin-top: 18px;
+    display: block;
+}

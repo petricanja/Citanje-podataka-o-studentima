@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Citanje podataka o studentima</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body>
+        <button id="get-text-btn">Dohvati</button>
+        <div id="loader"></div>
+        <textarea id="my-text-area" rows="24"></textarea>
+
+        <script>
+            let button = document.getElementById ("get-text=btn");
+            let textArea = document.getElementById ("my-text-area");
+            let loader = document.getElementById ("loader");
+
+            function Student(name, adress, phone, course) {
+                this.name = name;
+                this.address = address;
+                this.phone = phone;
+                this.course = course;
+
+                this.getInfo = function () {
+                    return "Name: " + "" + this.name + "\n" +
+                    "Address :" + "" + this.address + "\n" +
+                    "Phone :" + "" + this.phone + "\n" + 
+                    "Course :" + "" + this.course
+                 }
+                };
+            button.addEventListener("click", function(){
+                textArea.innerHTML = "";
+                getData();
+            });
+               async function getData (){
+                   loader.style.display = "inline-block";
+                   try{
+                       let response = await fetch ("https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt");
+                       if (response.status !== 200) {
+                           throw new Error("Erroe while reading file.");
+                       }
+
+                       let text = await response.text();
+                       var data = text.split('\n');
+                       var student = [];
+                       let studentBrojNiz = 0;
+
+                       for (let i = 0; i < 5; i++) {
+                           if (student.lenght[i] !== 4) {
+                               student.push(new Student(
+                                   this.name = data[0 + studentBrojNiz],
+                                   this.address = data[1 + studentBrojNiz],
+                                   this.phone = data[2 + studentBrojNiz],
+                                   this.course = data[3 + studentBrojNiz]
+                               ));
+                               studentBrojNiz = studentBrojNiz + 4
+                               student[i] = student[i].getInfo ();
+                           }
+                           else{
+                               i++
+                           }
+                           textArea.innerHTML += student[i] + '\n' + '\n';}
+                       }
+                       catch (err) {
+                           textArea.innerHTML = "Fetch problem: " + err.message;
+                       }
+                       finally {
+                           loader.style.display = "none";
+                       }
+
+                   }
+        
+
+        </script>
+    </body>
+</html>
